@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+}
+
+.container {
+  margin: 0;
+  background-color: rgb(254, 254, 254);
+  padding: 5vw;
+  position: relative;
+  overflow: auto;
+  font-family: sans-serif;
+  width: 50vw;
+  height: 60vh;
+  top: 10vh;
+  margin: auto;
+  border: 1px solid black;
+}
+
+.message-bubble {
+  border-radius: 30px;
+  padding: 2vh 2vw;
+  width: fit-content;
+  max-width: 20vw;
+  border: 1px solid black;
+}
+
+.message-row {
+  width: 100%;
+  padding: 1vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.sender-row {
+  justify-content: flex-end;
+}
+
+.receiver-row {
+  justify-content: flex-start;
+}
+
+.sender {
+  background-color: #1982fc;
+}
+
+.receiver {
+  background-color: #e1e1e1;
+}
