@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: sans-serif;
 }
 
 #container {
@@ -7,7 +8,6 @@ body {
   padding: 5vw;
   position: relative;
   overflow-y: auto;
-  font-family: sans-serif;
   width: 50vw;
   height: 50vh;
   top: 10vh;
