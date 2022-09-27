@@ -2,18 +2,33 @@ body {
   margin: 0;
 }
 
-.container {
-  margin: 0;
+#container {
   background-color: rgb(254, 254, 254);
   padding: 5vw;
   position: relative;
-  overflow: auto;
+  overflow-y: auto;
   font-family: sans-serif;
   width: 50vw;
-  height: 60vh;
+  height: 50vh;
   top: 10vh;
   margin: auto;
   border: 1px solid black;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+#button {
+  padding: 1vh;
+  position: fixed;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.disable {
+  color: rgb(161, 161, 161);
 }
 
 .message-bubble {

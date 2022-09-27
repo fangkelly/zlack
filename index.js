@@ -1,3 +1,5 @@
+container = document.getElementById("container")
+let active = true
 const ADJECTIVE=["fire", "lit", "goated", "extra", "slay", "bussin", 
 "valid", "mid", "cancelled", "extra" , "sus", "drippy", "mood", 
 "shook", "big yikes", "deadass", "gas", 'pressed']
@@ -6,11 +8,9 @@ const NOUN_1=["Karen", "simp", "bestie", "NCP", "fam", "stan", "GOAT", "sis", "s
 const VERB_1=["flexing", "slaying", "pushing P", "stanning", "catching these hands",
 "gaslighting", "gatekeeping", "girlbossing", "sending me", "throwing shade", "living in my head rent free", 
 "yeeting", "hitting different", "gaslighting, gatekeeping, girlbossing"]
-const VERB_2=["flex", "slay", "stan", "catch these hands", "drag",
-"gaslight", "gatekeep", "girlboss", "throw shade", "lives in my head rent free", "yeet", "hit different", "slaps", "built different"]
-const EXCLAMATION=["l + ratio", "sheesh", "W", "af", "no cap", "tbh", "iykyk", "bet", "i'm weak",
+const EXCLAMATION=["l + ratio", "sheesh", "W", "af", "no cap", "tbh", "iykyk", "bet", "i'm weak", "let's goo",
 "but go off i guess", "check", "im dead", "im deceased", "pog", "love that for you", "pull up", "you feel", "facts no printer", "yeet"]
-const START=["pov", "mfw", "say less", "for real", "tbh", "wake up honey", "bruh", "yo", "sis", "aint no way"]
+const START=["pov", "mfw", "say less", "for real", "tbh", "wake up honey", "bruh", "yo", "sis", "aint no way", "bro"]
 const NOUN_0 = ["i", "you", "she", "he", "they"]
 const VERB_0 = {
     "you":"are",
@@ -21,37 +21,58 @@ const VERB_0 = {
 }
 
 
-
-function create_sentence(type, start, noun_0, noun_1, verb_0, verb_1, verb_2, adjective, adverb, exclamation) {
-    
+function create_sentence(type, start, noun_0, noun_1, verb_0, verb_1, adjective, adverb, exclamation) {
     if (type == 0) {
         return [start, noun_0, verb_0, adverb, adjective, exclamation]
-    }
-    else if (type == 1){
+    } else if (type == 1){
         return [start, noun_0, verb_0, adverb, "a", noun_1, exclamation]
-    }
-    else if (type == 2){
+    } else if (type == 2){
         return [start, noun_0, verb_0, adverb, verb_1, exclamation]
     }
 }
     
 
 function print_sentence(){
-    const start = START[randint(0, len(START)-1)]
-    const noun_0 = NOUN_0[randint(0, len(NOUN_0)-1)]
-    const noun_1 = NOUN_1[randint(0, len(NOUN_1)-1)]
+    const start = START[Math.floor(Math.random() * START.length)]
+    const noun_0 = NOUN_0[Math.floor(Math.random() * NOUN_0.length)]
+    const noun_1 = NOUN_1[Math.floor(Math.random() * NOUN_1.length)]
     const verb_0 = VERB_0[noun_0]
-    const verb_1 = VERB_1[randint(0, len(VERB_1)-1)]
-    const verb_2 = VERB_2[randint(0, len(VERB_2)-1)]
-    const adjective = ADJECTIVE[randint(0, len(ADJECTIVE)-1)]
-    const adverb = ADVERB[randint(0, len(ADVERB)-1)]
-    const exclamation = EXCLAMATION[randint(0, len(EXCLAMATION)-1)]
-
-    const sentence = create_sentence(randint(0,2), start, noun_0, noun_1, verb_0, verb_1, verb_2, adjective, adverb, exclamation)
+    const verb_1 = VERB_1[Math.floor(Math.random() * VERB_1.length)]
+    const adjective = ADJECTIVE[Math.floor(Math.random() * ADJECTIVE.length)]
+    const adverb = ADVERB[Math.floor(Math.random() * ADVERB.length-1)]
+    const exclamation = EXCLAMATION[Math.floor(Math.random() * EXCLAMATION.length)]
+    const sentence = create_sentence(Math.floor(Math.random() * 3), start, noun_0, noun_1, verb_0, verb_1, adjective, adverb, exclamation)
     return(sentence.join(" "))
 }
 
 
-window.addEventListener('load', (event) => {
-    console.log("hi")
-  });
+function addMessage(sender) {
+    let row = document.createElement('div')
+    row.classList.add(`${sender?"sender":"receiver"}-row`)
+    row.classList.add(`message-row`)
+    let bubble = document.createElement('div')
+    bubble.classList.add('message-bubble')
+    bubble.classList.add(`${sender?"sender":"receiver"}`)
+    let text = document.createTextNode(print_sentence());
+    bubble.append(text)
+    row.appendChild(bubble)
+    container.appendChild(row)
+    container.scrollTop = container.scrollHeight;
+}
+
+
+function start() {
+    console.log("active ", active)
+    if (active) {    
+        console.log("active ", active)
+        addMessage(true)
+        active = false
+        document.getElementById("button").classList.add("disable")
+        console.log("active ", active)
+        setTimeout(function(){
+            addMessage(false)
+            document.getElementById("button").classList.remove("disable")
+            active = true
+        },1000);
+     }
+  };
